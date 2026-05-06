@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bat Ball Stump Game</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg,#0f172a,#1e293b,#334155);
+            color: white;
+        }
+
+        .container{
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            text-align: center;
+            width: 400px;
+        }
+
+        h1{
+            margin-bottom: 25px;
+            font-size: 35px;
+            color: #facc15;
+            text-shadow: 2px 2px 10px black;
+        }
+
+        .btn-container{
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button{
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .bat{
+            background: #22c55e;
+        }
+
+        .ball{
+            background: #3b82f6;
+        }
+
+        .stump{
+            background: #ef4444;
+        }
+
+        button:hover{
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.4);
+        }
+
+        #result{
+            margin-top: 25px;
+            font-size: 20px;
+            line-height: 1.6;
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🏏 Bat Ball Stump</h1>
+
+        <div class="btn-container">
+            <button class="bat" onclick="playGame('Bat')">🏏 Bat</button>
+            <button class="ball" onclick="playGame('Ball')">⚽ Ball</button>
+            <button class="stump" onclick="playGame('Stump')">🪵 Stump</button>
+        </div>
+
+        <div id="result">
+            Choose an option to start the game!
+        </div>
+    </div>
+
+    <script>
+
+        function getComputerChoice(){
+
+            let random_no = Math.random() * 3;
+
+            if(random_no > 0 && random_no <= 1){
+                return 'Bat';
+            }
+            else if(random_no > 1 && random_no <= 2){
+                return 'Ball';
+            }
+            else{
+                return 'Stump';
+            }
+        }
+
+        function playGame(userChoice){
+
+            let computerchoice = getComputerChoice();
+
+            let resultMsg = '';
+
+            if(userChoice === computerchoice){
+                resultMsg = "🤝 It's a Tie!";
+            }
+
+            else if(
+                (userChoice === 'Bat' && computerchoice === 'Ball') ||
+                (userChoice === 'Ball' && computerchoice === 'Stump') ||
+                (userChoice === 'Stump' && computerchoice === 'Bat')
+            ){
+                resultMsg = "🎉 You Won!";
+            }
+
+            else{
+                resultMsg = "💻 Computer Won!";
+            }
+
+            document.querySelector('#result').innerHTML =
+            `
+            You chose <b>${userChoice}</b> <br>
+            Computer chose <b>${computerchoice}</b> <br><br>
+            <span style="font-size:24px;">${resultMsg}</span>
+            `;
+        }
+
+    </script>
+
+</body>
+</html>
